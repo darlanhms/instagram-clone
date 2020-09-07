@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, HTMLAttributes } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useField } from '@unform/core'
 
 import StyledInput from '../../styles/input'
 
 interface Props {
   name: string
-  label: string
+  label?: string
 }
 
 type InputProps = JSX.IntrinsicElements['input'] & Props
@@ -23,10 +23,14 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
   }, [fieldName, registerField])
 
   return (
-    <div>
-      <label>{label}</label>
-      <StyledInput defaultValue={defaultValue} ref={inputRef} {...rest} />
-    </div>
+    <>
+      {label && <label>{label}</label>}
+      <StyledInput
+        defaultValue={defaultValue}
+        ref={inputRef as any}
+        {...rest}
+      />
+    </>
   )
 }
 
