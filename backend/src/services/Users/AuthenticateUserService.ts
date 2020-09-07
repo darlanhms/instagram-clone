@@ -35,8 +35,6 @@ class AuthenticateUserService {
 
     const { expiresIn, secret } = tokenConfig;
 
-    console.log(secret);
-
     if (!secret) {
       throw new AppError('Secret não encontrado', 401);
     }
