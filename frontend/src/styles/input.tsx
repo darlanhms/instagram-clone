@@ -9,7 +9,7 @@ const Input = styled.input`
   padding: 9px 0 7px 8px;
   text-overflow: ellipsis;
   border: 1px solid rgb(219, 219, 219);
-  background: ${props => props.theme.colors.seconday};
+  background: ${props => props.theme.colors.secondary};
   border-radius: 3px;
   color: rgb(38, 38, 38);
   font-size: 12px;

@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { Form as Unform } from '@unform/web'
 import { FormHandles, SubmitHandler } from '@unform/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons'
-import api from '../services/api'
+
+import LoginUserUseCase from '../useCases/Users/LoginUser'
 
 import Input from '../components/Form/Input'
 import Button from '../styles/button'
@@ -26,6 +27,8 @@ import Logo from '../assets/images/logo.png'
 import AppStore from '../assets/images/app_store.png'
 import PlayStore from '../assets/images/play_store.png'
 
+const loginUser = new LoginUserUseCase()
+
 const Login: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const [error, setError] = useState<string>()
@@ -37,32 +40,15 @@ const Login: React.FC = () => {
   const handleLogin: SubmitHandler<{
     email: string
     password: string
-  }> = ({ email, password }) => {
-    if (email && password) {
-      api
-        .post('/users/login', {
-          email,
-          password
-        })
-        .then(({ data: { user, token } }) => {
-          console.log(user, token)
-        })
-        .catch(err => {
-          if (err.response) {
-            const {
-              data: { message }
-            } = err.response
-
-            if (message) {
-              setError(message)
-            }
-          } else {
-            setError('Erro inesperado, tente novamente')
-          }
-        })
-    } else {
-      setError('Informe usuário e senha')
-    }
+  }> = userInfo => {
+    loginUser
+      .execute(userInfo)
+      .then(result => {
+        console.log(result)
+      })
+      .catch(err => {
+        setError(err.message)
+      })
   }
 
   return (

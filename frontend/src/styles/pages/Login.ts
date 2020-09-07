@@ -75,6 +75,11 @@ export const FormContent = styled.div`
     line-height: 18px;
     font-weight: 600;
   }
+
+  p {
+    font-size: 14px;
+    text-align: center;
+  }
 `
 
 export const Divisor = styled.div`

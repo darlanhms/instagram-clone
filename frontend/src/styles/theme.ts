@@ -4,7 +4,7 @@ const theme = {
     darkText: 'rgb(250, 250, 250)',
     backgroundColor: 'rgb(250, 250, 250)',
     primary: 'rgb(38, 38, 38)',
-    seconday: 'rgb(250, 250, 250)'
+    secondary: 'rgb(250, 250, 250)'
   }
 }
 
