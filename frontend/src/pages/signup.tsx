@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { Form as Unform } from '@unform/web'
 import { FormHandles, SubmitHandler } from '@unform/core'
 import { ValidationError } from 'yup'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons'
 
-import { Container } from '../styles/pages/Signup'
-import { FormContent, ObtainApp } from '../styles/pages/Login'
+import { Container, Subtitle } from '../styles/pages/Signup'
+import { Divisor, FormContent, ObtainApp } from '../styles/pages/Login'
 import Button from '../styles/button'
 import Input from '../components/Form/Input'
 
@@ -54,6 +56,22 @@ const Register: React.FC = () => {
       <Container>
         <FormContent>
           <img src={Logo} alt="" />
+          <Subtitle>
+            Registre-se para ver fotos e vídeos dos seus amigos
+          </Subtitle>
+          <Button>
+            <FontAwesomeIcon
+              icon={faFacebookSquare}
+              size="lg"
+              style={{ marginRight: 5 }}
+            />
+            Registre-se com o Facebook
+          </Button>
+          <Divisor>
+            <div className="line"></div>
+            <div className="text">OU</div>
+            <div className="line"></div>
+          </Divisor>
           <fieldset>
             <Unform ref={formRef} onSubmit={handleSignup}>
               <Input
