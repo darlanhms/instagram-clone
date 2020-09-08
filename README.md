@@ -1,2 +1,2 @@
 # Instagram clone
-An instagram clone inspired by @lorinpop17/app-ideas
+An instagram clone inspired by @florinpop17/app-ideas
