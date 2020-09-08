@@ -9,6 +9,10 @@ const UsersRouter = Router();
 UsersRouter.post('/', async (req: Request, res: Response) => {
   const { username, email, password, name } = req.body;
 
+  if (!username || !email || !password || !name) {
+    throw new AppError('Verifique os campos informados', 422);
+  }
+
   const createUser = new CreateUserService();
 
   const user = await createUser.execute({

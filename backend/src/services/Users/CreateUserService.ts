@@ -25,7 +25,7 @@ class CreateUserService {
     });
 
     if (checkEmailUsed) {
-      throw new AppError('Email address already used.');
+      throw new AppError('Endereço de e-mail já está cadastrado.');
     }
 
     const checkUsernameUsed = await usersRepository.findOne({
@@ -33,7 +33,7 @@ class CreateUserService {
     });
 
     if (checkUsernameUsed) {
-      throw new AppError('Username already used.');
+      throw new AppError('Nome de usuário já está cadastrado.');
     }
 
     const hashedPassword = await hash(password, 8);

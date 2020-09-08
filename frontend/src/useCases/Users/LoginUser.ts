@@ -1,5 +1,6 @@
 import User from '../../entities/User'
 import api from '../../services/api'
+import { tratAxiosError } from '../../utils/axios'
 
 interface Request {
   email: string
@@ -29,17 +30,7 @@ export default class LoginUserUseCase {
           user: new User(data.user, data.user.id)
         }
       } catch (error) {
-        if (error.response) {
-          const {
-            data: { message }
-          } = error.response
-
-          if (message) {
-            throw new Error(message)
-          }
-        } else {
-          throw new Error('Erro inesperado, tente novamente')
-        }
+        throw new Error(tratAxiosError(error))
       }
     } else {
       throw new Error('Informe usuário e senha')

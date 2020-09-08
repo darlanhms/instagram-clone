@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { useField } from '@unform/core'
 
 import StyledInput from '../../styles/input'
+import { ErrorMessage } from '../../styles/errorMessage'
 
 interface Props {
   name: string
@@ -30,6 +31,17 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
         ref={inputRef as any}
         {...rest}
       />
+      {error && (
+        <ErrorMessage
+          style={{
+            marginBottom: 5,
+            fontSize: 11,
+            textAlign: 'left'
+          }}
+        >
+          {error}
+        </ErrorMessage>
+      )}
     </>
   )
 }

@@ -3,16 +3,22 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { Form as Unform } from '@unform/web'
 import { FormHandles, SubmitHandler } from '@unform/core'
+import { ValidationError } from 'yup'
 
 import { Container } from '../styles/pages/Signup'
 import { FormContent, ObtainApp } from '../styles/pages/Login'
 import Button from '../styles/button'
-import Input from '../styles/input'
+import Input from '../components/Form/Input'
+
+import User from '../entities/User'
+import SignupUserUseCase from '../useCases/Users/SignupUser'
 
 import Logo from '../assets/images/logo.png'
 import AppStore from '../assets/images/app_store.png'
 import PlayStore from '../assets/images/play_store.png'
-import User from '../entities/User'
+import { ErrorMessage } from '../styles/errorMessage'
+
+const SignupUser = new SignupUserUseCase()
 
 const Register: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
@@ -22,7 +28,23 @@ const Register: React.FC = () => {
     setError('')
   }
 
-  const handleSignup: SubmitHandler<User> = (userInfo): void => {}
+  const handleSignup: SubmitHandler<User> = async (userInfo): Promise<void> => {
+    try {
+      await SignupUser.execute(userInfo)
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        const errorObject = {}
+
+        error.inner.forEach(err => {
+          errorObject[err.path] = err.message
+        })
+
+        formRef.current.setErrors(errorObject)
+      } else {
+        setError(error.message)
+      }
+    }
+  }
 
   return (
     <div>
@@ -55,6 +77,11 @@ const Register: React.FC = () => {
                 placeholder="Senha"
                 onFocus={handleFocusInput}
               />
+              {error && (
+                <ErrorMessage style={{ marginTop: 10, fontSize: 12 }}>
+                  {error}
+                </ErrorMessage>
+              )}
               <Button style={{ marginTop: 15 }} type="submit">
                 Registre-se
               </Button>
