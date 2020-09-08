@@ -26,12 +26,14 @@ import LoginImage from '../assets/images/instagram.png'
 import Logo from '../assets/images/logo.png'
 import AppStore from '../assets/images/app_store.png'
 import PlayStore from '../assets/images/play_store.png'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 const loginUser = new LoginUserUseCase()
 
 const Login: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const [error, setError] = useState<string>()
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleFocusInput = () => {
     setError('')
@@ -76,8 +78,16 @@ const Login: React.FC = () => {
                   placeholder="Senha"
                   onFocus={handleFocusInput}
                 />
-                <Button style={{ marginTop: 15 }} type="submit">
-                  Login
+                <Button
+                  disabled={loading}
+                  style={{ marginTop: 15 }}
+                  type="submit"
+                >
+                  {loading ? (
+                    <FontAwesomeIcon icon={faSpinner} spin={true} />
+                  ) : (
+                    'Login'
+                  )}
                 </Button>
               </Unform>
             </fieldset>

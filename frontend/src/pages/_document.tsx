@@ -9,6 +9,8 @@ import Document, {
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
+import LogoIco from '../assets/images/instagram-logo.ico'
+
 export default class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
@@ -47,6 +49,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
             rel="stylesheet"
           />
+          <link rel="icon" href={LogoIco} />
         </Head>
         <body>
           <Main />
