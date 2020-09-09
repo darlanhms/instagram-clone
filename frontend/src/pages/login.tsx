@@ -1,15 +1,16 @@
-import React, { useRef, useState } from 'react'
-import Head from 'next/head'
-import Link from 'next/link'
-import { Form as Unform } from '@unform/web'
-import { FormHandles, SubmitHandler } from '@unform/core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons'
+import React, { useRef, useState } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { Form as Unform } from '@unform/web';
+import { FormHandles, SubmitHandler } from '@unform/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 
-import LoginUserUseCase from '../useCases/Users/LoginUser'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import LoginUserUseCase from '../useCases/Users/LoginUser';
 
-import Input from '../components/Form/Input'
-import Button from '../styles/button'
+import Input from '../components/Form/Input';
+import Button from '../styles/button';
 import {
   Container,
   ImageContent,
@@ -18,40 +19,43 @@ import {
   Divisor,
   ExternalLogin,
   ForgotPassword,
-  ObtainApp
-} from '../styles/pages/Login'
-import { ErrorMessage } from '../styles/errorMessage'
+  ObtainApp,
+} from '../styles/pages/Login';
+import ErrorMessage from '../styles/errorMessage';
 
-import LoginImage from '../assets/images/instagram.png'
-import Logo from '../assets/images/logo.png'
-import AppStore from '../assets/images/app_store.png'
-import PlayStore from '../assets/images/play_store.png'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import LoginImage from '../assets/images/instagram.png';
+import Logo from '../assets/images/logo.png';
+import AppStore from '../assets/images/app_store.png';
+import PlayStore from '../assets/images/play_store.png';
 
-const loginUser = new LoginUserUseCase()
+const loginUser = new LoginUserUseCase();
 
 const Login: React.FC = () => {
-  const formRef = useRef<FormHandles>(null)
-  const [error, setError] = useState<string>()
-  const [loading, setLoading] = useState<boolean>(false)
+  const formRef = useRef<FormHandles>(null);
+  const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleFocusInput = () => {
-    setError('')
-  }
+  const handleFocusInput = (): void => {
+    setError('');
+  };
 
   const handleLogin: SubmitHandler<{
-    email: string
-    password: string
+    email: string;
+    password: string;
   }> = userInfo => {
+    setLoading(true);
     loginUser
       .execute(userInfo)
       .then(result => {
-        console.log(result)
+        setLoading(false);
+        localStorage.setItem('acesso', result.token);
+        window.location.pathname = '/';
       })
       .catch(err => {
-        setError(err.message)
-      })
-  }
+        setLoading(false);
+        setError(err.message);
+      });
+  };
 
   return (
     <div>
@@ -84,7 +88,7 @@ const Login: React.FC = () => {
                   type="submit"
                 >
                   {loading ? (
-                    <FontAwesomeIcon icon={faSpinner} spin={true} />
+                    <FontAwesomeIcon icon={faSpinner} spin />
                   ) : (
                     'Login'
                   )}
@@ -92,9 +96,9 @@ const Login: React.FC = () => {
               </Unform>
             </fieldset>
             <Divisor>
-              <div className="line"></div>
+              <div className="line" />
               <div className="text">OU</div>
-              <div className="line"></div>
+              <div className="line" />
             </Divisor>
             <ExternalLogin>
               <FontAwesomeIcon size="lg" icon={faFacebookSquare} />
@@ -118,7 +122,7 @@ const Login: React.FC = () => {
         </FormContainer>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

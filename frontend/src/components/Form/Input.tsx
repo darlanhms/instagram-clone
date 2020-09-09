@@ -1,31 +1,31 @@
-import React, { useEffect, useRef } from 'react'
-import { useField } from '@unform/core'
+import React, { useEffect, useRef } from 'react';
+import { useField } from '@unform/core';
 
-import StyledInput from '../../styles/input'
-import { ErrorMessage } from '../../styles/errorMessage'
+import StyledInput from '../../styles/input';
+import ErrorMessage from '../../styles/errorMessage';
 
 interface Props {
-  name: string
-  label?: string
+  name: string;
+  label?: string;
 }
 
-type InputProps = JSX.IntrinsicElements['input'] & Props
+type InputProps = JSX.IntrinsicElements['input'] & Props;
 
 const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
-  const { fieldName, defaultValue, registerField, error } = useField(name)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'value'
-    })
-  }, [fieldName, registerField])
+      path: 'value',
+    });
+  }, [fieldName, registerField]);
 
   return (
     <>
-      {label && <label>{label}</label>}
+      {/* {label && <label>{label}</label>} */}
       <StyledInput
         defaultValue={defaultValue}
         ref={inputRef as any}
@@ -36,14 +36,14 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
           style={{
             marginBottom: 5,
             fontSize: 11,
-            textAlign: 'left'
+            textAlign: 'left',
           }}
         >
           {error}
         </ErrorMessage>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

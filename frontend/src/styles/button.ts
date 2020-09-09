@@ -1,30 +1,30 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface Props {
-  variant?: 'primary' | 'dark' | 'default'
+  variant?: 'primary' | 'dark' | 'default';
 }
 
 const Button = styled.button<Props>`
   background-color: ${props => {
     switch (props.variant) {
       case 'primary':
-        return 'rgb(0,149,246)'
+        return 'rgb(0,149,246)';
       case 'dark':
-        return '#333333'
+        return '#333333';
       case 'default':
-        return '#ffffff'
+        return '#ffffff';
       default:
-        return 'rgb(0,149,246)'
+        return 'rgb(0,149,246)';
     }
   }};
   color: ${props => {
     switch (props.variant) {
       case 'primary' || 'dark':
-        return props.theme.colors.darkText
+        return props.theme.colors.darkText;
       case 'default':
-        return props.theme.colors.text
+        return props.theme.colors.text;
       default:
-        return props.theme.colors.darkText
+        return props.theme.colors.darkText;
     }
   }};
   border: 1px solid transparent;
@@ -37,5 +37,5 @@ const Button = styled.button<Props>`
   text-transform: inherit;
   text-overflow: ellipsis;
   margin: 5px 0px;
-`
-export default Button
+`;
+export default Button;

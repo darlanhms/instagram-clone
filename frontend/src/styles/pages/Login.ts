@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: grid;
@@ -12,7 +12,7 @@ export const Container = styled.div`
     grid-template-columns: 1fr;
     grid-template-areas: 'form';
   }
-`
+`;
 
 export const ImageContent = styled.div`
   grid-area: 'image-content';
@@ -24,7 +24,7 @@ export const ImageContent = styled.div`
   @media (max-width: 765px) {
     display: none;
   }
-`
+`;
 
 export const FormContainer = styled.div`
   grid-area: 'form';
@@ -36,7 +36,7 @@ export const FormContainer = styled.div`
   @media (max-width: 765px) {
     align-items: center;
   }
-`
+`;
 
 export const FormContent = styled.div`
   display: flex;
@@ -80,7 +80,7 @@ export const FormContent = styled.div`
     font-size: 14px;
     text-align: center;
   }
-`
+`;
 
 export const Divisor = styled.div`
   display: flex;
@@ -101,7 +101,7 @@ export const Divisor = styled.div`
     margin: 0px 10px;
     color: rgb(142, 142, 142);
   }
-`
+`;
 export const ExternalLogin = styled.div`
   color: #385185;
   text-align: center;
@@ -124,7 +124,7 @@ export const ExternalLogin = styled.div`
   p {
     display: inline-block;
   }
-`
+`;
 
 export const ForgotPassword = styled.div`
   font-size: 12px;
@@ -133,7 +133,7 @@ export const ForgotPassword = styled.div`
   margin-top: 12px;
   cursor: pointer;
   color: ${props => props.theme.colors.text};
-`
+`;
 
 export const ObtainApp = styled.div`
   margin-top: 10px;
@@ -152,4 +152,4 @@ export const ObtainApp = styled.div`
     height: 40px;
     margin: 5px;
   }
-`
+`;

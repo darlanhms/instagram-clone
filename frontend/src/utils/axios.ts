@@ -1,15 +1,15 @@
-import { AxiosError } from 'axios'
+import { AxiosError } from 'axios';
 
 export const tratAxiosError = (err: AxiosError): string => {
   if (err.response) {
     const {
-      data: { message }
-    } = err.response
+      data: { message },
+    } = err.response;
 
     if (message) {
-      return message
+      return message;
     }
   } else {
-    return 'Erro inesperado, tente novamente'
+    return 'Erro inesperado, tente novamente';
   }
-}
+};

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const Container = styled.div`
   img {
     margin-bottom: 10px;
   }
-`
+`;
 
 export const Subtitle = styled.h1`
   color: rgb(142, 142, 142);
@@ -20,4 +20,4 @@ export const Subtitle = styled.h1`
   line-height: 20px;
   text-align: center;
   margin-bottom: 20px;
-`
+`;
