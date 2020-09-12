@@ -10,6 +10,6 @@ export const tratAxiosError = (err: AxiosError): string => {
       return message;
     }
   } else {
-    return 'Erro inesperado, tente novamente.';
+    return 'Erro inesperado, tente novamente';
   }
 };
